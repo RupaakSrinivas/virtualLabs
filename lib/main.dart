@@ -1,213 +1,3 @@
-// import 'package:english_words/english_words.dart';
-// import 'package:flutter/material.dart';
-// import 'package:provider/provider.dart';
-
-// void main() {
-//   runApp(MyApp());
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return ChangeNotifierProvider(
-//       create: (context) => MyAppState(),
-//       child: MaterialApp(
-//         title: 'Namer App',
-//         theme: ThemeData(
-//           useMaterial3: true,
-//           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrangeAccent),
-//         ),
-//         home: MyHomePage(),
-//       ),
-//     );
-//   }
-// }
-
-// class MyAppState extends ChangeNotifier {
-//   var current = WordPair.random();
-//   // var pair = appState
-
-//   void getNext() {
-//     current = WordPair.random();
-//     notifyListeners();
-//   }
-
-//   var favorites = <WordPair>[];
-
-//   void toggleFavorite() {
-//     if (favorites.contains(current)) {
-//       favorites.remove(current);
-//     } else {
-//       favorites.add(current);
-//     }
-//     notifyListeners();
-//   }
-// }
-
-// class MyHomePage extends StatefulWidget {
-//   @override
-//   State<MyHomePage> createState() => _MyHomePageState();
-// }
-
-// class _MyHomePageState extends State<MyHomePage> {
-//   var selectedIndex = 0;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     // ignore: unused_local_variable
-//     Widget page;
-//     switch (selectedIndex) {
-//       case 0:
-//         page = GeneratorPage();
-//         break;
-//       case 1:
-//         page = FavoritesPage();
-//         break;
-//       default:
-//         throw UnimplementedError('no widget for $selectedIndex');
-//     }
-
-//     return LayoutBuilder(
-//       builder: (context, constraints) {
-//         return Scaffold(
-//           body: Row(
-//             children: [
-//               SafeArea(
-//                 child: NavigationRail(
-//                   extended: constraints.maxWidth >= 600,
-//                   destinations: [
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.home),
-//                       label: Text('Home'),
-//                     ),
-//                     NavigationRailDestination(
-//                       icon: Icon(Icons.favorite),
-//                       label: Text('Favorites'),
-//                     ),
-//                   ],
-//                   selectedIndex: selectedIndex,
-//                   onDestinationSelected: (value) {
-//                     setState(() {
-//                       selectedIndex = value;
-//                     });
-//                   },
-//                 ),
-//               ),
-//               Expanded(
-//                 child: Container(
-//                   color: Theme.of(context).colorScheme.primaryContainer,
-//                   child: page,
-//                 ),
-//               ),
-//             ],
-//           ),
-//         );
-//       }
-//     );
-//   }
-// }
-
-// class GeneratorPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     var appState = context.watch<MyAppState>();
-//     var pair = appState.current;
-
-//     IconData icon;
-//     if (appState.favorites.contains(pair)) {
-//       icon = Icons.favorite;
-//     } else {
-//       icon = Icons.favorite_border;
-//     }
-
-//     return Center(
-//       child: Column(
-//         mainAxisAlignment: MainAxisAlignment.center,
-//         children: [
-//           BigCard(pair: pair),
-//           SizedBox(height: 10),
-//           Row(
-//             mainAxisSize: MainAxisSize.min,
-//             children: [
-//               ElevatedButton.icon(
-//                 onPressed: () {
-//                   appState.toggleFavorite();
-//                 },
-//                 icon: Icon(icon),
-//                 label: Text('Like'),
-//               ),
-//               SizedBox(width: 10),
-//               ElevatedButton(
-//                 onPressed: () {
-//                   appState.getNext();
-//                 },
-//                 child: Text('Next'),
-//               ),
-//             ],
-//           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
-
-// class FavoritesPage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     var appState = context.watch<MyAppState>();
-
-//     if (appState.favorites.isEmpty) {
-//       return Center(
-//         child: Text('No favorites yet.'),
-//       );
-//     }
-
-//     return ListView(
-//       children: [
-//         Padding(
-//           padding: const EdgeInsets.all(20),
-//           child: Text('You have '
-//               '${appState.favorites.length} favorites:'),
-//         ),
-//         for (var pair in appState.favorites)
-//           ListTile(
-//             leading: Icon(Icons.favorite),
-//             title: Text(pair.asLowerCase),
-//           ),
-//       ],
-//     );
-//   }
-// }
-
-// class BigCard extends StatelessWidget {
-//   const BigCard({
-//     super.key,
-//     required this.pair,
-//   });
-
-//   final WordPair pair;
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final theme = Theme.of(context);
-
-//     final style = theme.textTheme.displayMedium!.copyWith(
-//       color: theme.colorScheme.onPrimary,
-//     );
-
-//     return Card(
-//       color: theme.colorScheme.primary,
-//       child: Padding(
-//         padding: const EdgeInsets.all(20.0),
-//         child: Text(pair.asString, style: style),
-//       ),
-//     );
-//   }
-// }
-
-
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import 'dart:convert';
@@ -220,9 +10,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Experiment App',
+      title: 'MobLabs',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
       home: HomePage(),
       routes: {
@@ -230,32 +20,88 @@ class MyApp extends StatelessWidget {
               subjectName: 'Physics',
               experiments: [
                 Experiment(
-                  name: 'Experiment 1',
+                  name: 'Sonometer',
                   embeddedHTML:
-                      '<div class="sketchfab-embed-wrapper"> <iframe title="Tektronix 2235 Oscilloscope" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/900b377c11724d8bb9985e6c17d6ebb9/embed?autostart=1&preload=1" height="600px" width="100%"> </iframe></div>',
+                      '<div class="sketchfab-embed-wrapper"> <iframe title="Tektronix 2235 Oscilloscope" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/900b377c11724d8bb9985e6c17d6ebb9/embed?autostart=1&preload=1" height="600px" width="80%"> </iframe></div>',
                 ),
                 Experiment(
-                  name: 'Experiment 2',
+                  name: 'Refractive Index of Liquid',
                   embeddedHTML:
-                      '<div class="sketchfab-embed-wrapper"> <iframe title="Bing Search Engine" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" height="600px" width="100%" src="https://www.bing.com"></iframe></div>',
+                      '<div class="sketchfab-embed-wrapper"> <iframe title="Bing Search Engine" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" height="600px" width="80%" src="https://www.bing.com"></iframe></div>',
+                ),
+                Experiment(
+                  name: 'Refractive Index of Prism',
+                  embeddedHTML: '',
+                ),
+                Experiment(
+                  name: 'Laser Grating',
+                  embeddedHTML: '',
+                ),
+                Experiment(
+                  name: 'Electron Diffraction',
+                  embeddedHTML: '',
+                ),
+                Experiment(
+                  name: 'Phase and Group Velocities',
+                  embeddedHTML: '',
+                ),
+                Experiment(
+                  name: 'Optical Fiber',
+                  embeddedHTML: '',
+                ),
+                Experiment(
+                  name: 'Solar Cell',
+                  embeddedHTML: '',
                 ),
               ],
             ),
         // Define routes for other subjects as well
+        '/chemistry': (context) =>
+            SubjectPage(subjectName: 'Chemistry', experiments: [
+              Experiment(
+                name: 'Hardness of Water',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Colorimeteric estimation of Ni2+',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Analysis of Iron by Potentiometer',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Estimation of Sulfate ion in drinking water',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Preparation of Important Drug',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Determination of Reaction Rate and Order',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Preparation of Nanosilica',
+                embeddedHTML: '',
+              ),
+              Experiment(
+                name: 'Thermodynamic functions from EMF',
+                embeddedHTML: '',
+              ),
+            ])
       },
     );
   }
 }
-
-
-
 
 class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Experiment App'),
+        title: Text('MobLabs'),
       ),
       body: Center(
         child: Column(
@@ -263,26 +109,92 @@ class HomePage extends StatelessWidget {
           children: [
             Text(
               'Choose a Subject',
-              style: TextStyle(fontSize: 24),
+              style: TextStyle(fontSize: 32),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/physics');
-              },
-              child: Text('Physics'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/chemistry');
-              },
-              child: Text('Chemistry'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/biology');
-              },
-              child: Text('Biology'),
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/physics');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('Physics')),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/BEEE');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('BEEE')),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/chemistry');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('Chemistry')),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/Mechanical');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('Mechanical')),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/Architecture');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('Architecture')),
+                    ),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(8),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/biology');
+                    },
+                    child: SizedBox(
+                      width: 100,
+                      height: 100,
+                      child: Center(child: Text('Biology')),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
@@ -312,7 +224,8 @@ class SubjectPage extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => WebViewPage(embeddedHTML: experiments[index].embeddedHTML),
+                  builder: (context) => WebViewPage(
+                      embeddedHTML: experiments[index].embeddedHTML),
                 ),
               );
             },
@@ -323,15 +236,12 @@ class SubjectPage extends StatelessWidget {
   }
 }
 
-
 class Experiment {
   final String name;
   final String embeddedHTML;
 
   const Experiment({required this.name, required this.embeddedHTML});
 }
-
-
 
 class WebViewPage extends StatelessWidget {
   final String embeddedHTML;
@@ -358,4 +268,3 @@ class WebViewPage extends StatelessWidget {
     );
   }
 }
-
