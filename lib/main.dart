@@ -237,7 +237,7 @@ class MyApp extends StatelessWidget {
                 Experiment(
                   name: 'Experiment 2',
                   embeddedHTML:
-                      '<div class="sketchfab-embed-wrapper"> ... Your embedded HTML code here ... </div>',
+                      '<div class="sketchfab-embed-wrapper"> <iframe title="Bing Search Engine" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" height="600px" width="100%" src="https://www.bing.com"></iframe></div>',
                 ),
               ],
             ),
@@ -345,11 +345,15 @@ class WebViewPage extends StatelessWidget {
         title: Text('Experiment'),
       ),
       body: WebView(
+        javascriptMode: JavascriptMode.unrestricted,
         initialUrl: Uri.dataFromString(
           embeddedHTML,
           mimeType: 'text/html',
           encoding: utf8,
         ).toString(),
+        onWebResourceError: (WebResourceError error) {
+          print('WebView Error: ${error.description}');
+        },
       ),
     );
   }
